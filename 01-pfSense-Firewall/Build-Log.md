@@ -71,3 +71,55 @@ Evidence:
 
 Validation:
 Snapshot exists and captures the pre-installation baseline for PFSENSE-FW01.
+
+## 2026-07-27 - Downloaded pfSense Installer
+
+Milestone:
+Downloaded the Netgate/pfSense installer for PFSENSE-FW01.
+
+Purpose:
+The installer will be used to install pfSense as the enterprise firewall operating system.
+
+Installer File:
+netgate-installer-v1.2-RELEASE-amd64.iso
+
+Evidence:
+- 005-pfSense-ISO-Downloaded.png
+
+Validation:
+pfSense installer file is stored in C:\CyberLab\ISOs.
+
+## 2026-07-27 - Attached pfSense Installer ISO
+
+Milestone:
+Attached the Netgate/pfSense installer ISO to PFSENSE-FW01.
+
+Configuration:
+- ISO attached: netgate-installer-v1.2-RELEASE-amd64.iso
+- VM: PFSENSE-FW01
+
+Purpose:
+This prepares the VM to boot into the pfSense installer.
+
+Evidence:
+- 006-pfSense-ISO-Attached.png
+
+Validation:
+VirtualBox Storage settings show the Netgate installer ISO attached to PFSENSE-FW01.
+## 2026-07-27 - Attached pfSense Installer ISO
+
+Milestone:
+Attached the Netgate/pfSense installer ISO to PFSENSE-FW01.
+
+Configuration:
+- ISO attached: netgate-installer-v1.2-RELEASE-amd64.iso
+- VM: PFSENSE-FW01
+
+Purpose:
+This prepares the VM to boot into the pfSense installer.
+
+Evidence:
+- 006-pfSense-ISO-Attached.png
+
+Validation:
+VirtualBox Storage settings show the Netgate installer ISO attached to PFSENSE-FW01.
