@@ -567,3 +567,95 @@ Evidence:
 
 Validation:
 Installer advanced to the next installation configuration screen.
+
+## 2026-08-09 - Validated pfSense Console Session
+
+Milestone:
+Confirmed that PFSENSE-FW01 was still running and reachable at the pfSense console after the base installation snapshot.
+
+Purpose:
+This validates that the firewall VM remained in a usable post-install state before connecting the Windows 11 lab client to the LAN side.
+
+Evidence:
+- 029-pfSense-Console-Session-Validation.png
+
+Validation:
+pfSense console session loaded successfully and showed the firewall ready for continued lab testing.
+
+## 2026-08-09 - Confirmed Windows 11 Lab Adapter on LAB-LAN
+
+Milestone:
+Confirmed the KAO-Tech-Windows11-Lab virtual machine network adapter was assigned to the LAB-LAN internal network.
+
+Configuration:
+- VM: KAO-Tech-Windows11-Lab
+- Adapter 1: Internal Network
+- Internal network name: LAB-LAN
+
+Purpose:
+This places the Windows 11 lab client on the same internal network as the pfSense LAN interface so DHCP can be tested.
+
+Evidence:
+- 030-Windows11-Adapter1-LAB-LAN.png
+
+Validation:
+VirtualBox network settings showed Adapter 1 attached to LAB-LAN.
+
+## 2026-08-09 - Started Windows 11 Lab Client Installation
+
+Milestone:
+Started installation of the KAO-Tech-Windows11-Lab virtual machine.
+
+Configuration:
+- VM: KAO-Tech-Windows11-Lab
+- Adapter 1: Internal Network
+- Internal network name: LAB-LAN
+- Connected firewall LAN: PFSENSE-FW01 em1 / 10.10.10.1/24
+- Virtual disk selected for install: Disk 0 Unallocated Space, 80.0 GB
+
+Purpose:
+This creates the Windows 11 client VM that will be used to test pfSense LAN DHCP, default gateway assignment, and client internet access through the firewall.
+
+Evidence:
+- 031-Windows11-DHCP-Address.png
+
+Validation:
+Passed. KAO-Tech-Windows11-Lab received IPv4 address 10.10.10.100/24 from the pfSense LAN network, with default gateway 10.10.10.1 and DNS suffix home.arpa.
+
+## 2026-08-09 - Validated Windows 11 Client Internet and DNS Connectivity
+
+Milestone:
+Confirmed that KAO-Tech-Windows11-Lab can reach the internet through the pfSense firewall and resolve external DNS names.
+
+Tests:
+- ping 8.8.8.8
+- ping google.com
+
+Purpose:
+This validates that the Windows 11 lab client can route outbound traffic through PFSENSE-FW01 and that DNS resolution works from the client network.
+
+Evidence:
+- 032-Windows11-Internet-DNS-Ping.png
+
+Validation:
+Passed. Ping to 8.8.8.8 returned 4 sent, 4 received, 0 lost. Ping to google.com resolved to 142.250.138.113 and returned 4 sent, 4 received, 0 lost.
+
+## 2026-08-09 - Created Windows 11 Base Install Snapshot
+
+Milestone:
+Created the post-installation VirtualBox snapshot for KAO-Tech-Windows11-Lab.
+
+Snapshot:
+KAO-W11-LAB01-001-BaseInstall-DHCPValidated
+
+Snapshot Description:
+Windows 11 lab client installed successfully. Local user KAOAdmin created. Adapter 1 connected to LAB-LAN. DHCP from pfSense validated with IP 10.10.10.100/24, gateway 10.10.10.1, and DNS suffix home.arpa. Internet and DNS connectivity confirmed through pfSense.
+
+Purpose:
+This snapshot preserves a clean, validated Windows 11 lab client before additional hardening, tools installation, or Active Directory/domain configuration work.
+
+Evidence:
+- 033-Windows11-Snapshot-BaseInstall-DHCPValidated.png
+
+Validation:
+Snapshot exists in VirtualBox and captures the verified Windows 11 client base state.
