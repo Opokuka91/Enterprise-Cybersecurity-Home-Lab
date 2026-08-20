@@ -659,3 +659,304 @@ Evidence:
 
 Validation:
 Snapshot exists in VirtualBox and captures the verified Windows 11 client base state.
+
+## 2026-08-20 - Started pfSense and Windows 11 Client for WebGUI Access
+
+Milestone:
+Started PFSENSE-FW01 and KAO-Tech-Windows11-Lab to continue firewall management testing.
+
+Purpose:
+Both VMs must be running so the Windows 11 client can access the pfSense WebGUI through the LAB-LAN network.
+
+Evidence:
+- 034-Lab-VMs-Started-pfSense-Windows11.png
+
+Validation:
+PFSENSE-FW01 and KAO-Tech-Windows11-Lab are both running. pfSense console shows LAN interface em1 at 10.10.10.1/24.
+
+## 2026-08-20 - Validated pfSense WebGUI Access from Windows 11 Client
+
+Milestone:
+Accessed the pfSense WebGUI from KAO-Tech-Windows11-Lab using the LAN gateway address.
+
+Test:
+- Browser: Microsoft Edge
+- URL: https://10.10.10.1
+- Source client: KAO-Tech-Windows11-Lab
+- Destination firewall: PFSENSE-FW01 LAN interface
+
+Purpose:
+This confirms the Windows 11 lab client can reach the pfSense management interface over the LAB-LAN network.
+
+Evidence:
+- 035-pfSense-WebGUI-Login-Page.png
+
+Validation:
+pfSense login page loaded successfully from the Windows 11 client.
+
+## 2026-08-20 - Started pfSense Setup Wizard
+
+Milestone:
+Logged into the pfSense WebGUI and reached the initial setup wizard.
+
+Configuration:
+- Username used: admin
+- Default password warning displayed
+- Wizard page: pfSense Setup
+
+Purpose:
+The setup wizard is used to apply the initial firewall system settings and replace insecure default credentials.
+
+Evidence:
+- 036-pfSense-Setup-Wizard-Start.png
+
+Validation:
+pfSense setup wizard loaded successfully after WebGUI login.
+
+## 2026-08-20 - Reviewed Setup Wizard Support Page
+
+Milestone:
+Reached Step 1 of the pfSense setup wizard.
+
+Purpose:
+This page provides Netgate support information and confirms the wizard flow is working.
+
+Evidence:
+- 037-pfSense-Wizard-Step1-Support.png
+
+Validation:
+Step 1 of 9 loaded successfully.
+
+## 2026-08-20 - Reviewed General Information Settings
+
+Milestone:
+Reached Step 2 of the pfSense setup wizard and reviewed hostname, domain, and DNS settings.
+
+Observed Configuration:
+- Hostname: pfSense
+- Domain: home.arpa
+- Primary DNS Server: blank
+- Secondary DNS Server: blank
+- Override DNS: enabled
+
+Purpose:
+The general information page controls the firewall hostname, local domain, and upstream DNS behavior.
+
+Evidence:
+- 038-pfSense-General-Information-Top.png
+- 039-pfSense-General-Information-DNS.png
+
+Validation:
+Step 2 of 9 loaded successfully and displayed the general firewall identity and DNS settings.
+
+## 2026-08-20 - Reviewed Time Server Settings
+
+Milestone:
+Reached Step 3 of the pfSense setup wizard and reviewed NTP/timezone settings.
+
+Observed Configuration:
+- Time server hostname: 2.pfsense.pool.ntp.org
+- Timezone: Etc/UTC
+
+Purpose:
+Correct time settings are important for firewall logs, event correlation, troubleshooting, and future SIEM integration.
+
+Evidence:
+- 040-pfSense-Time-Server-Settings-UTC.png
+
+Validation:
+Step 3 of 9 loaded successfully.
+
+## 2026-08-20 - Configured Timezone for Central Time
+
+Milestone:
+Configured the pfSense timezone during the setup wizard.
+
+Configuration:
+- Time server hostname: 2.pfsense.pool.ntp.org
+- Timezone: US/Central
+
+Purpose:
+Using Central Time keeps firewall logs aligned with the local lab workstation, screenshots, and future incident timeline documentation.
+
+Evidence:
+- 041-pfSense-Timezone-US-Central.png
+
+Validation:
+Time server settings show the lab timezone set to US/Central.
+
+## 2026-08-20 - Reviewed WAN Configuration Defaults
+
+Milestone:
+Reached Step 4 of the pfSense setup wizard and reviewed WAN interface settings.
+
+Observed Configuration:
+- WAN configuration type: DHCP
+- MAC address: blank
+- MTU: blank
+- MSS: blank
+- DHCP hostname: blank
+- PPPoE/PPTP settings: blank
+- Block RFC1918 private networks: enabled
+- Block bogon networks: enabled
+
+Purpose:
+The WAN interface receives its upstream address from VirtualBox NAT. Because VirtualBox NAT uses a private RFC1918 address range, the RFC1918 blocking setting must be adjusted for this lab design.
+
+Evidence:
+- 042-pfSense-WAN-Configuration-Type-DHCP.png
+- 043-pfSense-WAN-DHCP-PPPoE-Settings.png
+- 044-pfSense-WAN-PPPoE-PPTP-Settings.png
+- 045-pfSense-WAN-PPTP-Settings.png
+- 046-pfSense-WAN-RFC1918-Bogon-Defaults.png
+
+Validation:
+Step 4 of 9 loaded successfully and showed the WAN interface configured for DHCP.
+
+## 2026-08-20 - Adjusted WAN RFC1918 Blocking for VirtualBox NAT
+
+Milestone:
+Changed the WAN private network blocking setting for the VirtualBox NAT lab design.
+
+Configuration:
+- Block RFC1918 private networks: disabled
+- Block bogon networks: enabled
+
+Purpose:
+VirtualBox NAT assigns the pfSense WAN interface a private 10.0.2.0/24 address. Disabling RFC1918 blocking prevents the lab WAN from blocking expected upstream private traffic while keeping bogon filtering enabled.
+
+Evidence:
+- 047-pfSense-WAN-RFC1918-Unchecked-Bogon-Checked.png
+
+Validation:
+WAN settings show RFC1918 blocking unchecked and bogon blocking checked.
+
+## 2026-08-20 - Reviewed LAN Configuration in Setup Wizard
+
+Milestone:
+Reached Step 5 of the pfSense setup wizard and verified LAN interface addressing.
+
+Configuration:
+- LAN IP address: 10.10.10.1
+- Subnet mask: 24
+
+Purpose:
+The LAN address is the default gateway and management address for the internal LAB-LAN network.
+
+Evidence:
+- 048-pfSense-LAN-Configuration.png
+
+Validation:
+LAN settings match the planned 10.10.10.0/24 enterprise lab subnet.
+
+## 2026-08-20 - Reached Admin Password Change Step
+
+Milestone:
+Reached Step 6 of the pfSense setup wizard to change the default admin password.
+
+Purpose:
+Changing the default admin password is a required hardening step because default firewall credentials are insecure and widely known.
+
+Evidence:
+- 049-pfSense-Admin-Password-Change-Blank.png
+
+Validation:
+Password change page loaded with empty password fields before entering the new credential.
+
+## 2026-08-20 - Changed Default Admin Password
+
+Milestone:
+Changed the pfSense admin password from the default value during the setup wizard.
+
+Security Note:
+The new password was not recorded in the repository, screenshots, build log, or chat transcript. The credential should be stored securely outside the lab repository.
+
+Purpose:
+Changing default credentials is a required firewall hardening step and prevents use of the widely known default admin password.
+
+Evidence:
+- 050-pfSense-Reload-Configuration.png
+
+Validation:
+The setup wizard advanced to the reload configuration step after password entry.
+
+## 2026-08-20 - Completed pfSense Setup Wizard
+
+Milestone:
+Completed the pfSense setup wizard after applying initial firewall settings.
+
+Configuration Completed:
+- Hostname/domain reviewed
+- Timezone set to US/Central
+- WAN configured for DHCP
+- RFC1918 blocking disabled for VirtualBox NAT WAN
+- Bogon blocking left enabled
+- LAN confirmed as 10.10.10.1/24
+- Admin password changed from default
+
+Purpose:
+This completes the initial WebGUI configuration and prepares the firewall for dashboard verification and future lab services.
+
+Evidence:
+- 051-pfSense-Wizard-Complete.png
+
+Validation:
+Wizard displayed the "Congratulations! pfSense is now configured." completion message.
+
+## 2026-08-20 - Verified pfSense Dashboard After Wizard
+
+Milestone:
+Loaded the pfSense dashboard after completing the setup wizard.
+
+Configuration Verified:
+- Firewall name: pfSense.home.arpa
+- Logged-in user: admin@10.10.10.100
+- Version: 2.8.1-RELEASE amd64
+- WAN: 10.0.2.15
+- LAN: 10.10.10.1
+
+Purpose:
+This confirms the WebGUI remains accessible after applying wizard settings and that both interfaces are visible from the dashboard.
+
+Evidence:
+- 052-pfSense-Dashboard-After-Wizard.png
+
+Validation:
+pfSense dashboard loaded successfully and displayed expected WAN/LAN interface addresses.
+
+## 2026-08-20 - Validated New Admin Password Login
+
+Milestone:
+Logged out of pfSense and successfully logged back in using the updated admin password.
+
+Security Note:
+The new admin password was validated but not recorded in screenshots, documentation, Git, or chat.
+
+Purpose:
+This confirms the default pfSense password was replaced and the new credential works for WebGUI access.
+
+Evidence:
+- 053-pfSense-New-Password-Login-Validated.png
+
+Validation:
+Dashboard loaded successfully after logging in with the updated admin password.
+
+## 2026-08-20 - Created WebGUI Wizard Complete Snapshot
+
+Milestone:
+Created the post-wizard VirtualBox snapshot for PFSENSE-FW01.
+
+Snapshot:
+PFSENSE-FW01-003-WebGUIWizardComplete
+
+Snapshot Description:
+pfSense setup wizard completed. Admin password changed from default and login validated. Timezone set to US/Central. WAN set to DHCP with RFC1918 blocking disabled for VirtualBox NAT and bogon blocking enabled. LAN confirmed as 10.10.10.1/24. Dashboard verified from Windows client at 10.10.10.100.
+
+Purpose:
+This snapshot preserves the firewall after initial WebGUI setup, credential hardening, WAN/LAN review, and dashboard validation.
+
+Evidence:
+- 054-pfSense-Snapshot-WebGUIWizardComplete.png
+
+Validation:
+Snapshot exists in the PFSENSE-FW01 snapshot chain after the base install snapshots.

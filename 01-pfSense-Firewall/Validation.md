@@ -99,3 +99,88 @@ Pass
 
 Evidence:
 - Evidence/Screenshots/033-Windows11-Snapshot-BaseInstall-DHCPValidated.png
+
+## 2026-08-20 - pfSense WebGUI Access Validation
+
+Test:
+Opened https://10.10.10.1 from Microsoft Edge inside KAO-Tech-Windows11-Lab.
+
+Expected Result:
+The pfSense login page should load from the firewall LAN interface.
+
+Actual Result:
+The pfSense login page loaded successfully.
+
+Status:
+Pass
+
+Evidence:
+- Evidence/Screenshots/035-pfSense-WebGUI-Login-Page.png
+
+## 2026-08-20 - pfSense Setup Wizard Completion Validation
+
+Test:
+Completed the pfSense setup wizard from the Windows 11 client WebGUI session.
+
+Expected Result:
+The setup wizard should complete after applying initial settings and changing the default admin password.
+
+Actual Result:
+The wizard displayed the "Congratulations! pfSense is now configured." completion message.
+
+Status:
+Pass
+
+Evidence:
+- Evidence/Screenshots/051-pfSense-Wizard-Complete.png
+
+## 2026-08-20 - pfSense Dashboard Validation
+
+Test:
+Clicked Finish after the setup wizard and verified that the pfSense dashboard loaded.
+
+Expected Result:
+The pfSense dashboard should load and show expected WAN and LAN interface information.
+
+Actual Result:
+Dashboard loaded successfully. WAN displayed 10.0.2.15 and LAN displayed 10.10.10.1.
+
+Status:
+Pass
+
+Evidence:
+- Evidence/Screenshots/052-pfSense-Dashboard-After-Wizard.png
+
+## 2026-08-20 - Updated Admin Password Login Validation
+
+Test:
+Logged out of pfSense and logged back in with the updated admin password from the Windows 11 client.
+
+Expected Result:
+The pfSense dashboard should load after authenticating with the updated password.
+
+Actual Result:
+The pfSense dashboard loaded successfully after logging back in.
+
+Status:
+Pass
+
+Evidence:
+- Evidence/Screenshots/053-pfSense-New-Password-Login-Validated.png
+
+## 2026-08-20 - WebGUI Wizard Snapshot Validation
+
+Test:
+Verified that a VirtualBox snapshot exists after successful pfSense WebGUI setup wizard completion and new password login validation.
+
+Expected Result:
+Snapshot PFSENSE-FW01-003-WebGUIWizardComplete should exist after the wizard is complete and dashboard access is validated.
+
+Actual Result:
+Snapshot PFSENSE-FW01-003-WebGUIWizardComplete exists in the PFSENSE-FW01 snapshot chain.
+
+Status:
+Pass
+
+Evidence:
+- Evidence/Screenshots/054-pfSense-Snapshot-WebGUIWizardComplete.png
