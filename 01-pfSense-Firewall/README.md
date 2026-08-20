@@ -27,6 +27,8 @@ Deploy a centralized firewall to control traffic between an internal enterprise 
 
 ## Lab Architecture
 
+![pfSense Enterprise Firewall Lab Architecture](Images/pfSense-Lab-Architecture.svg)
+
 ```text
                     Internet
                         |

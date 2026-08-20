@@ -24,6 +24,8 @@ Each completed phase produces portfolio-ready documentation, resume bullets, int
 
 ## Current Architecture
 
+![pfSense Enterprise Firewall Lab Architecture](01-pfSense-Firewall/Images/pfSense-Lab-Architecture.svg)
+
 ```text
                     Internet
                         |
