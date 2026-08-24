@@ -126,3 +126,83 @@ Snapshot is visible in VirtualBox Manager and DC01 remains powered off.
 
 Git:
 Commit this DC01 baseline checkpoint locally before starting the operating system installation.
+
+## 2026-08-23 - Installed Windows Server on DC01
+
+Milestone:
+Installed Windows Server 2025 Standard Evaluation with Desktop Experience on DC01.
+
+Configuration:
+- Edition: Windows Server 2025 Standard Evaluation (Desktop Experience)
+- Install type: Clean installation
+- Target disk: Disk 0, 80 GB
+- Local account: Administrator
+
+Purpose:
+Install the base Windows Server operating system before configuring server identity, static networking, and Active Directory Domain Services.
+
+Evidence:
+- Evidence/Screenshots/009-Windows-Server-Setup-Started.png
+- Evidence/Screenshots/010-Windows-Server-Edition-Selection.png
+- Evidence/Screenshots/011-Windows-Server-Disk-Selection.png
+- Evidence/Screenshots/012-Windows-Server-Ready-To-Install.png
+- Evidence/Screenshots/013-Windows-Server-Installation-Progress.png
+- Evidence/Screenshots/014-Windows-Server-Administrator-Password-Screen.png
+- Evidence/Screenshots/015-Windows-Server-Installed-Lock-Screen.png
+- Evidence/Screenshots/016-Windows-Server-First-Login-Server-Manager.png
+
+Validation:
+DC01 booted successfully after installation and Server Manager opened at first login.
+
+Snapshot:
+Pending first-login and network validation.
+
+Git:
+Commit after Windows Server installation, network validation, and baseline snapshot are captured.
+
+## 2026-08-23 - Validated Initial DC01 Network Connectivity
+
+Milestone:
+Validated that DC01 received network configuration from pfSense and could reach the gateway, Internet, and DNS.
+
+Observed Configuration:
+- DHCP IPv4 address: 10.10.10.101
+- Subnet mask: 255.255.255.0
+- Default gateway: 10.10.10.1
+- DNS suffix: home.arpa
+
+Validation:
+- Ping 10.10.10.1 passed with 0 percent packet loss.
+- Ping 8.8.8.8 passed with 0 percent packet loss.
+- Ping google.com passed with 0 percent packet loss.
+
+Evidence:
+- Evidence/Screenshots/017-DC01-Initial-IPConfig-DHCP.png
+- Evidence/Screenshots/018-DC01-Internet-DNS-Ping-Validation.png
+- Evidence/Screenshots/019-DC01-Gateway-Ping-Validation.png
+
+Snapshot:
+Created snapshot `DC01-002-WindowsServerInstalled-NetworkValidated` before assigning a static IP address.
+
+Git:
+Commit after the post-install snapshot evidence is captured.
+
+## 2026-08-23 - Captured DC01 Post-Install Snapshot
+
+Milestone:
+Captured a DC01 snapshot after Windows Server installation and initial network validation.
+
+Snapshot:
+- Snapshot name: DC01-002-WindowsServerInstalled-NetworkValidated
+
+Purpose:
+Create a recovery point before changing DC01 from DHCP to static addressing.
+
+Evidence:
+- Evidence/Screenshots/020-DC01-Snapshot-WindowsServerInstalled-NetworkValidated.png
+
+Validation:
+Snapshot is visible in VirtualBox Manager after Windows Server installation and network testing.
+
+Git:
+Commit this Windows Server installation checkpoint locally.
