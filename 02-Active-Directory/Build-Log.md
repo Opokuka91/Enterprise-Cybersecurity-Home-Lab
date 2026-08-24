@@ -19,3 +19,110 @@ None. No VM changes have been made yet.
 
 Git:
 Commit after the initial Lab 002 structure and first evidence checkpoint are verified.
+
+## 2026-08-23 - Downloaded Windows Server Evaluation ISO
+
+Milestone:
+Downloaded the Windows Server evaluation ISO for the DC01 build.
+
+Configuration:
+- ISO location: C:\CyberLab\ISOs
+- ISO filename: 26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso
+- ISO size: 7.59 GB
+
+Purpose:
+Prepare the Windows Server installation media required to create the first domain controller.
+
+Evidence:
+- Evidence/Screenshots/002-Windows-Server-ISO-Downloaded.png
+
+Validation:
+ISO file is visible in C:\CyberLab\ISOs.
+
+Snapshot:
+None. No VM changes have been made.
+
+Git:
+Commit after DC01 VM shell is created and documented.
+
+## 2026-08-23 - Created DC01 Virtual Machine Shell
+
+Milestone:
+Created the DC01 virtual machine in VirtualBox.
+
+Configuration:
+- VM name: DC01
+- VM folder: C:\CyberLab\Virtual Machines\DC01
+- Operating system profile: Windows Server 2022 (64-bit)
+- Installation media: Windows Server 2025 Standard Evaluation ISO
+- Memory: 4096 MB
+- CPUs: 2
+- EFI: Enabled
+- Virtual disk: 80 GB VDI
+- Storage allocation: Dynamic
+
+Purpose:
+Provision the Windows Server VM that will become the first Active Directory domain controller.
+
+Evidence:
+- Evidence/Screenshots/003-DC01-VM-Creation-Name-and-ISO.png
+- Evidence/Screenshots/004-DC01-Hardware-Configured.png
+- Evidence/Screenshots/005-DC01-Virtual-Disk-Configured.png
+- Evidence/Screenshots/006-DC01-VM-Created-VirtualBox-List.png
+
+Validation:
+DC01 appears in VirtualBox Manager and is powered off, ready for network configuration.
+
+Snapshot:
+None. Snapshot will be created after network settings are configured and verified.
+
+Git:
+Commit after DC01 network configuration is documented.
+
+## 2026-08-23 - Configured DC01 Network Adapter
+
+Milestone:
+Configured DC01 Adapter 1 for the internal enterprise LAN.
+
+Configuration:
+- Adapter 1: Enabled
+- Attached to: Internal Network
+- Network name: LAB-LAN
+- Adapter type: Intel PRO/1000 MT Desktop (82540EM)
+- Promiscuous mode: Deny
+- Virtual cable: Connected
+
+Purpose:
+Connect DC01 to the protected enterprise LAN behind pfSense so it can later provide Active Directory and DNS services to lab clients.
+
+Evidence:
+- Evidence/Screenshots/007-DC01-Network-Adapter-LAB-LAN.png
+
+Validation:
+Adapter 1 is attached to LAB-LAN and the virtual cable is connected.
+
+Snapshot:
+Created snapshot `DC01-001-VMCreated-NetworkConfigured` before starting the Windows Server installation.
+
+Git:
+Commit after the baseline snapshot evidence is captured.
+
+## 2026-08-23 - Captured DC01 Baseline Snapshot
+
+Milestone:
+Captured the first DC01 snapshot after VM creation and network configuration.
+
+Snapshot:
+- Snapshot name: DC01-001-VMCreated-NetworkConfigured
+
+Purpose:
+Create a clean rollback point before installing Windows Server.
+
+Evidence:
+- Evidence/Screenshots/008-DC01-Snapshot-VMCreated-NetworkConfigured.png
+
+Validation:
+Snapshot is visible in VirtualBox Manager and DC01 remains powered off.
+
+Git:
+Commit this DC01 baseline checkpoint locally before starting the operating system installation.
