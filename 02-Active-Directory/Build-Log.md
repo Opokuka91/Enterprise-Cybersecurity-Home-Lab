@@ -262,3 +262,53 @@ Snapshot is visible in VirtualBox Manager and DC01 is powered off.
 
 Git:
 Commit and push this static IP validation milestone to GitHub.
+
+## 2026-08-30 - Renamed Windows Server Hostname to DC01
+
+Milestone:
+Renamed the Windows Server computer name from the default installer-generated hostname to DC01.
+
+Configuration:
+- Previous hostname: WIN-SV3LHDQESMT
+- New hostname: DC01
+- IPv4 address: 10.10.10.10/24
+- Default gateway: 10.10.10.1
+- Temporary DNS server: 10.10.10.1
+
+Purpose:
+Set the server identity before installing Active Directory Domain Services. A domain controller should have a clear, stable hostname before promotion because the name becomes part of DNS records, management tools, logs, documentation, and troubleshooting workflows.
+
+Evidence:
+- Evidence/Screenshots/029-DC01-Computer-Name-Changed-Before-Restart.png
+- Evidence/Screenshots/030-DC01-Hostname-Rename-Validated.png
+- Evidence/Screenshots/030A-DC01-Rename-Ping-Gateway-Internet-Partial.png
+- Evidence/Screenshots/030B-DC01-Rename-DNS-Ping-Validated.png
+
+Validation:
+The hostname command returned DC01 after reboot. Gateway, Internet, and DNS ping validation passed after the rename.
+
+Snapshot:
+Created snapshot `DC01-004-Renamed-StaticIPValidated` after hostname and network validation.
+
+Git:
+Commit and push this hostname rename milestone to GitHub.
+
+## 2026-08-30 - Captured DC01 Hostname Rename Snapshot
+
+Milestone:
+Captured a recovery snapshot after DC01 was renamed and validated.
+
+Snapshot:
+- Snapshot name: DC01-004-Renamed-StaticIPValidated
+
+Purpose:
+Create a rollback point before installing the Active Directory Domain Services role and promoting the server to a domain controller.
+
+Evidence:
+- Evidence/Screenshots/031-DC01-Snapshot-Renamed-StaticIPValidated.png
+
+Validation:
+Snapshot is visible in VirtualBox Manager and DC01 is powered off.
+
+Git:
+Commit and push this pre-Active Directory checkpoint.

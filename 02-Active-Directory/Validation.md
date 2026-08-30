@@ -51,3 +51,23 @@ Connectivity Validation:
 Next Required Step:
 - Recovery snapshot `DC01-003-StaticIPValidated` created after static IP validation.
 - Rename the Windows hostname from WIN-SV3LHDQESMT to DC01 before installing Active Directory Domain Services.
+
+## 2026-08-30 - Hostname Rename Validation
+
+Results:
+- Windows Server hostname was renamed from WIN-SV3LHDQESMT to DC01.
+- DC01 rebooted successfully after the rename.
+- Static IP configuration remained in place after reboot.
+- Gateway, Internet, and DNS validation passed after the rename.
+- Snapshot `DC01-004-Renamed-StaticIPValidated` was created before Active Directory installation.
+
+Evidence:
+- Evidence/Screenshots/029-DC01-Computer-Name-Changed-Before-Restart.png
+- Evidence/Screenshots/030-DC01-Hostname-Rename-Validated.png
+- Evidence/Screenshots/030A-DC01-Rename-Ping-Gateway-Internet-Partial.png
+- Evidence/Screenshots/030B-DC01-Rename-DNS-Ping-Validated.png
+- Evidence/Screenshots/031-DC01-Snapshot-Renamed-StaticIPValidated.png
+
+Next Required Step:
+- Install the Active Directory Domain Services role on DC01.
+- Promote DC01 to the first domain controller for the lab domain.
