@@ -4,7 +4,7 @@
 
 - [x] DC01 boots successfully.
 - [x] DC01 network adapter is connected to LAB-LAN.
-- [ ] DC01 uses static IPv4 address 10.10.10.10/24.
+- [x] DC01 uses static IPv4 address 10.10.10.10/24.
 - [x] DC01 can ping pfSense at 10.10.10.1.
 - [x] DC01 can reach the Internet through pfSense.
 - [x] DC01 can resolve DNS.
@@ -25,3 +25,29 @@ Evidence:
 - Evidence/Screenshots/017-DC01-Initial-IPConfig-DHCP.png
 - Evidence/Screenshots/018-DC01-Internet-DNS-Ping-Validation.png
 - Evidence/Screenshots/019-DC01-Gateway-Ping-Validation.png
+
+## 2026-08-30 - Static IP Configuration Validation
+
+Results:
+- DC01 was changed from DHCP to static IPv4 addressing.
+- IPv4 address is 10.10.10.10/24.
+- Default gateway is 10.10.10.1.
+- Temporary DNS server is 10.10.10.1 until Active Directory DNS is installed.
+- DHCP is disabled on the DC01 Ethernet adapter.
+- Current Windows hostname is WIN-SV3LHDQESMT and must be renamed to DC01 before domain controller promotion.
+
+Evidence:
+- Evidence/Screenshots/025-DC01-IPv4-Static-IP-Entered-Before-Apply.png
+- Evidence/Screenshots/026-DC01-Static-IPConfig-Verified.png
+- Evidence/Screenshots/026C-DC01-Static-IPConfig-All-DNS-Verified.png
+- Evidence/Screenshots/027A-DC01-Static-IP-Ping-Gateway-Internet-Partial.png
+- Evidence/Screenshots/027-DC01-Static-IP-Ping-Validation.png
+
+Connectivity Validation:
+- Ping 10.10.10.1 from DC01 passed.
+- Ping 8.8.8.8 from DC01 passed.
+- Ping google.com from DC01 passed.
+
+Next Required Step:
+- Recovery snapshot `DC01-003-StaticIPValidated` created after static IP validation.
+- Rename the Windows hostname from WIN-SV3LHDQESMT to DC01 before installing Active Directory Domain Services.

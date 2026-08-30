@@ -206,3 +206,59 @@ Snapshot is visible in VirtualBox Manager after Windows Server installation and 
 
 Git:
 Commit this Windows Server installation checkpoint locally.
+
+## 2026-08-30 - Configured DC01 Static IPv4 Address
+
+Milestone:
+Changed DC01 from a pfSense DHCP lease to a planned static IPv4 address.
+
+Configuration:
+- IPv4 address: 10.10.10.10
+- Subnet mask: 255.255.255.0
+- Default gateway: 10.10.10.1
+- DNS server: 10.10.10.1
+- DHCP enabled: No
+- Current Windows hostname: WIN-SV3LHDQESMT
+
+Purpose:
+Assign DC01 a stable server address before installing Active Directory Domain Services and DNS.
+
+Evidence:
+- Evidence/Screenshots/021-pfSense-Pre-Static-IP-Verification.png
+- Evidence/Screenshots/022-DC01-Logged-In-Before-Static-IP.png
+- Evidence/Screenshots/023-DC01-Network-Connections-Opened.png
+- Evidence/Screenshots/024-DC01-IPv4-Properties-Before-Static-IP.png
+- Evidence/Screenshots/025-DC01-IPv4-Static-IP-Entered-Before-Apply.png
+- Evidence/Screenshots/026-DC01-Static-IPConfig-Verified.png
+- Evidence/Screenshots/026A-DC01-Static-IPConfig-All-Start.png
+- Evidence/Screenshots/026B-DC01-Static-IPConfig-All-Hostname.png
+- Evidence/Screenshots/026C-DC01-Static-IPConfig-All-DNS-Verified.png
+
+Validation:
+Static IPv4 configuration is visible in ipconfig and ipconfig /all. Gateway, Internet, and DNS ping validation passed through pfSense.
+
+Snapshot:
+Created snapshot `DC01-003-StaticIPValidated` after DC01 was cleanly shut down.
+
+Git:
+Commit after static IP validation evidence and snapshot evidence are captured.
+
+## 2026-08-30 - Captured DC01 Static IP Snapshot
+
+Milestone:
+Captured a DC01 recovery snapshot after static IPv4 addressing and connectivity validation were completed.
+
+Snapshot:
+- Snapshot name: DC01-003-StaticIPValidated
+
+Purpose:
+Create a rollback point before renaming the Windows Server hostname and installing Active Directory Domain Services.
+
+Evidence:
+- Evidence/Screenshots/028-DC01-Snapshot-StaticIPValidated.png
+
+Validation:
+Snapshot is visible in VirtualBox Manager and DC01 is powered off.
+
+Git:
+Commit and push this static IP validation milestone to GitHub.
