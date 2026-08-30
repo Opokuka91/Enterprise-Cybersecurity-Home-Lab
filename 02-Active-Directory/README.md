@@ -16,7 +16,7 @@ Active Directory centralizes identity, authentication, computer management, and 
 - Planned IPv4 address: 10.10.10.10/24
 - Gateway: 10.10.10.1
 - DNS role: Active Directory integrated DNS
-- Domain name: kaotech.local
+- Domain name: kaotech.home.arpa
 
 ## Acceptance Criteria
 
@@ -28,10 +28,19 @@ This lab is complete when:
 - Active Directory Domain Services is installed.
 - A new forest/domain is created.
 - DNS is functional.
-- The Windows 11 client can join the domain.
+- Windows 11 client can join the domain. (pending next milestone)
 - Evidence screenshots are captured.
 - VirtualBox snapshots are created at stable milestones.
 - Documentation is committed to GitHub.
+
+## Current Status
+
+- DC01 has been installed and renamed.
+- Static IPv4 address is configured as 10.10.10.10/24.
+- Active Directory Domain Services and DNS are installed.
+- DC01 has been promoted as the first domain controller for kaotech.home.arpa.
+- AD DNS SRV records were validated after re-registering DNS with Netlogon.
+- The next milestone is joining the Windows 11 client to the domain.
 
 ## Evidence Standard
 

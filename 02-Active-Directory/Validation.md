@@ -8,8 +8,10 @@
 - [x] DC01 can ping pfSense at 10.10.10.1.
 - [x] DC01 can reach the Internet through pfSense.
 - [x] DC01 can resolve DNS.
-- [ ] Active Directory Domain Services installs successfully.
-- [ ] Domain controller promotion completes successfully.
+- [x] Active Directory Domain Services installs successfully.
+- [x] Domain controller promotion completes successfully.
+- [x] AD DNS SRV records resolve successfully.
+- [x] `dcdiag /test:Connectivity` passes.
 - [ ] Windows 11 client can join the domain.
 
 ## 2026-08-23 - Initial Network Validation
@@ -71,3 +73,40 @@ Evidence:
 Next Required Step:
 - Install the Active Directory Domain Services role on DC01.
 - Promote DC01 to the first domain controller for the lab domain.
+
+## 2026-08-30 - Active Directory Promotion and DNS Validation
+
+Results:
+- Active Directory Domain Services installed successfully on DC01.
+- DC01 was promoted as the first domain controller for kaotech.home.arpa.
+- NetBIOS domain name is KAOTECH.
+- DC01 login context changed to `kaotech\administrator`.
+- DC01 retained static IPv4 address 10.10.10.10/24.
+- Default gateway remained 10.10.10.1.
+- DNS is now handled locally by the domain controller.
+
+Evidence:
+- Evidence/Screenshots/038-ADDS-Role-Installation-Succeeded.png
+- Evidence/Screenshots/046-ADDS-Prerequisites-Check-Passed.png
+- Evidence/Screenshots/047-ADDS-Domain-Controller-Promotion-Complete.png
+- Evidence/Screenshots/048A-ADDS-Post-Promotion-Whoami-Validation.png
+- Evidence/Screenshots/048-ADDS-Post-Promotion-Identity-Network-Validation.png
+
+Post-Promotion DNS Validation:
+- Initial `dcdiag /test:Connectivity` failed because an `_msdcs.kaotech.home.arpa` DNS record could not be resolved.
+- DNS registration was refreshed using `ipconfig /registerdns`, Netlogon restart, and `nltest /dsregdns`.
+- `_ldap._tcp.dc._msdcs.kaotech.home.arpa` resolved to `dc01.kaotech.home.arpa`.
+- `dcdiag /test:Connectivity` passed after DNS registration.
+
+Evidence:
+- Evidence/Screenshots/049B-ADDS-DCDIAG-Connectivity-Failed.png
+- Evidence/Screenshots/050B-ADDS-Netlogon-Started-NLTest-DSRegDNS-Success.png
+- Evidence/Screenshots/051A-ADDS-SRV-Record-Validation-Passed.png
+- Evidence/Screenshots/051B-ADDS-DCDIAG-Connectivity-Passed.png
+- Evidence/Screenshots/052-DC01-Snapshot-ADDS-Promoted-DNSValidated.png
+
+Next Required Step:
+- Start pfSense and DC01.
+- Start the Windows 11 client.
+- Configure the client DNS to use DC01.
+- Join the Windows 11 client to the `kaotech.home.arpa` domain.

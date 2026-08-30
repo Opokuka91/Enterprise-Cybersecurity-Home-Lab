@@ -312,3 +312,133 @@ Snapshot is visible in VirtualBox Manager and DC01 is powered off.
 
 Git:
 Commit and push this pre-Active Directory checkpoint.
+
+## 2026-08-30 - Installed Active Directory Domain Services Role
+
+Milestone:
+Installed the Active Directory Domain Services role and required management tools on DC01.
+
+Configuration:
+- Server: DC01
+- Role installed: Active Directory Domain Services
+- Additional tools installed: Group Policy Management and AD DS administrative tools
+
+Purpose:
+Prepare DC01 to become the first domain controller for the enterprise home lab.
+
+Evidence:
+- Evidence/Screenshots/032-ADDS-Add-Roles-And-Features-Started.png
+- Evidence/Screenshots/033-ADDS-Installation-Type-Selected.png
+- Evidence/Screenshots/034-ADDS-Server-Selection-DC01.png
+- Evidence/Screenshots/035-ADDS-Server-Role-Selected.png
+- Evidence/Screenshots/036-ADDS-Features-Defaults.png
+- Evidence/Screenshots/037-ADDS-Confirmation-Before-Install.png
+- Evidence/Screenshots/038A-ADDS-Role-Installation-Progress.png
+- Evidence/Screenshots/038-ADDS-Role-Installation-Succeeded.png
+
+Validation:
+Role installation completed successfully and Server Manager displayed the option to promote the server to a domain controller.
+
+Snapshot:
+None. Snapshot was deferred until domain controller promotion and DNS validation completed.
+
+Git:
+Commit after promotion, troubleshooting documentation, and final validation are captured.
+
+## 2026-08-30 - Promoted DC01 to Domain Controller
+
+Milestone:
+Promoted DC01 as the first domain controller for the new Active Directory forest.
+
+Configuration:
+- Deployment operation: Add a new forest
+- Root domain name: kaotech.home.arpa
+- NetBIOS domain name: KAOTECH
+- Forest functional level: Windows Server 2025
+- Domain functional level: Windows Server 2025
+- DNS Server role: Enabled
+- Global Catalog: Enabled
+- DNS delegation: Not created
+- Database folder: C:\WINDOWS\NTDS
+- Log files folder: C:\WINDOWS\NTDS
+- SYSVOL folder: C:\WINDOWS\SYSVOL
+
+Purpose:
+Create centralized identity, authentication, DNS, and Group Policy infrastructure for the enterprise lab.
+
+Evidence:
+- Evidence/Screenshots/039-ADDS-Promotion-Deployment-Configuration.png
+- Evidence/Screenshots/040-ADDS-New-Forest-Domain-Entered.png
+- Evidence/Screenshots/041-ADDS-Domain-Controller-Options.png
+- Evidence/Screenshots/042A-ADDS-DNS-Options-Delegation-Checked-Before-Correction.png
+- Evidence/Screenshots/042-ADDS-DNS-Options-No-Delegation.png
+- Evidence/Screenshots/043-ADDS-NetBIOS-Domain-Name.png
+- Evidence/Screenshots/044-ADDS-Default-Paths.png
+- Evidence/Screenshots/045-ADDS-Review-Options.png
+- Evidence/Screenshots/046-ADDS-Prerequisites-Check-Passed.png
+- Evidence/Screenshots/047-ADDS-Domain-Controller-Promotion-Complete.png
+- Evidence/Screenshots/047A-ADDS-Promotion-Domain-Login-After-Reset.png
+- Evidence/Screenshots/048A-ADDS-Post-Promotion-Whoami-Validation.png
+- Evidence/Screenshots/048-ADDS-Post-Promotion-Identity-Network-Validation.png
+- Evidence/Screenshots/049A-ADDS-Post-Promotion-IPConfig-Confirmed.png
+
+Validation:
+DC01 rebooted after promotion. Login changed to the KAOTECH domain context and `whoami` returned `kaotech\administrator`.
+
+Snapshot:
+Deferred until AD DNS validation passed.
+
+Git:
+Commit after DNS issue resolution, snapshot evidence, and documentation update.
+
+## 2026-08-30 - Resolved AD DNS SRV Record Registration
+
+Milestone:
+Resolved an initial `dcdiag /test:Connectivity` failure caused by missing or delayed AD DNS service record registration.
+
+Issue:
+`dcdiag` could not resolve an `_msdcs.kaotech.home.arpa` record and reported that DC01 failed the Connectivity test.
+
+Resolution:
+- Flushed the DNS resolver cache.
+- Initiated DNS record registration.
+- Restarted the Netlogon service.
+- Ran `nltest /dsregdns` to force domain controller DNS registration.
+- Re-ran SRV record lookup and `dcdiag /test:Connectivity`.
+
+Evidence:
+- Evidence/Screenshots/049B-ADDS-DCDIAG-Connectivity-Failed.png
+- Evidence/Screenshots/049C-ADDS-DCDIAG-Connectivity-Failure-Details.png
+- Evidence/Screenshots/050A-ADDS-DNS-Flush-Register-Netlogon-Stop.png
+- Evidence/Screenshots/050B-ADDS-Netlogon-Started-NLTest-DSRegDNS-Success.png
+- Evidence/Screenshots/051A-ADDS-SRV-Record-Validation-Passed.png
+- Evidence/Screenshots/051B-ADDS-DCDIAG-Connectivity-Passed.png
+
+Validation:
+The `_ldap._tcp.dc._msdcs.kaotech.home.arpa` SRV record resolved to `dc01.kaotech.home.arpa`, and `dcdiag /test:Connectivity` passed.
+
+Snapshot:
+Created snapshot `DC01-005-ADDS-Promoted-DNSValidated` after shutting down DC01 cleanly.
+
+Git:
+Commit and push this AD DS promotion and DNS validation milestone.
+
+## 2026-08-30 - Captured DC01 AD DS Promotion Snapshot
+
+Milestone:
+Captured a recovery snapshot after DC01 was promoted and AD DNS validation passed.
+
+Snapshot:
+- Snapshot name: DC01-005-ADDS-Promoted-DNSValidated
+
+Purpose:
+Create a rollback point before joining the Windows 11 client to the new Active Directory domain.
+
+Evidence:
+- Evidence/Screenshots/052-DC01-Snapshot-ADDS-Promoted-DNSValidated.png
+
+Validation:
+Snapshot is visible in VirtualBox Manager and DC01 is powered off.
+
+Git:
+Commit and push this completed Active Directory promotion checkpoint.
