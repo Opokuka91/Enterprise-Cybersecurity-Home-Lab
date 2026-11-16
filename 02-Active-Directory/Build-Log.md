@@ -570,3 +570,15 @@ On DC01, verified lab.outside01 is enabled in KAO Lab / Lab Users. MemberOf was 
 On Windows 11, whoami confirmed kaotech\lab.outside01. After a successful user policy refresh, net use listed no connections, and net use H: returned connection not found (2250). Reading `\\DC01\HelpdeskDocs\Welcome.txt` returned Access is denied. Together with the DC01 membership baseline, this validates skipped drive mapping and denied direct file access for this test user.
 
 [Client result](Evidence/Screenshots/079-Outside-User-Access-Denied.png)
+
+## 2026-11-16 - Grant helpdesk membership to the outside test user
+
+Added lab.outside01 to GG-Helpdesk using Add-ADGroupMember on DC01. Get-ADGroupMember then listed both lab.support01 and lab.outside01. Fresh Windows 11 sign-in and access validation are pending.
+
+[Updated membership](Evidence/Screenshots/080-Outside01-Added-To-Helpdesk.png)
+
+### Outside test user after access grant
+
+Following the GG-Helpdesk membership change and a fresh Windows 11 sign-in, whoami returned kaotech\lab.outside01. User policy refresh succeeded. Net use H: showed an OK connection to `\\DC01\HelpdeskDocs`. Reading Welcome.txt via both H: and the direct UNC path succeeded. This retest demonstrates the change from denied access to working access after the group grant.
+
+[Client access after grant](Evidence/Screenshots/081-Outside01-Helpdesk-Access-Granted.png)

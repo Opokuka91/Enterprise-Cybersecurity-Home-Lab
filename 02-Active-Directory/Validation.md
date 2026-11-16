@@ -146,3 +146,9 @@ In the kaotech\lab.support01 session on Windows 11, Get-Content H:\Welcome.txt r
 On Windows 11, whoami confirmed kaotech\lab.outside01. After a successful user policy refresh, net use listed no connections, and net use H: returned connection not found (2250). Reading `\\DC01\HelpdeskDocs\Welcome.txt` returned Access is denied. Together with the DC01 membership baseline, this validates skipped drive mapping and denied direct file access for this test user.
 
 [Client result](Evidence/Screenshots/079-Outside-User-Access-Denied.png)
+
+### Outside test user after access grant
+
+Following the GG-Helpdesk membership change and a fresh Windows 11 sign-in, whoami returned kaotech\lab.outside01. User policy refresh succeeded. Net use H: showed an OK connection to `\\DC01\HelpdeskDocs`. Reading Welcome.txt via both H: and the direct UNC path succeeded. This retest demonstrates the change from denied access to working access after the group grant.
+
+[Client access after grant](Evidence/Screenshots/081-Outside01-Helpdesk-Access-Granted.png)
