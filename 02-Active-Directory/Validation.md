@@ -130,3 +130,7 @@ On Windows 11, `whoami` confirmed the active account was kaotech\lab.support01. 
 ## Shared folder authorization | 2026-11-15
 
 From the normal lab.support01 session on KAO-W11-LAB01, Get-Content returned the contents of `\\DC01\HelpdeskDocs\Welcome.txt`. New-Item on the same share returned UnauthorizedAccessException when creating write-test.txt. Test-Path returned False. The successful read and specific permission error confirmed the intended read-only access. [Client evidence](Evidence/Screenshots/069-HelpdeskDocs-Client-Access.png)
+
+## HelpdeskDocs drive mapping | 2026-11-16
+
+On KAO-W11-LAB01, whoami returned kaotech\lab.support01. Before refresh, H: was available and net use listed no connections. The user policy refresh succeeded. The user gpresult summary included HelpdeskDocs Drive, net use showed H: connected to `\\DC01\HelpdeskDocs` with status OK, and reading H:\Welcome.txt returned the lab reference text. [Windows 11 evidence](Evidence/Screenshots/075-Helpdesk-Drive-Client.png)

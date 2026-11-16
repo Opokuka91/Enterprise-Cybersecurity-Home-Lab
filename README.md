@@ -60,15 +60,18 @@ Each completed phase produces portfolio-ready documentation, resume bullets, int
 | Phase | Project | Status |
 | --- | --- | --- |
 | 01 | pfSense Firewall | Complete |
-| 02 | Windows Server | Planned |
-| 03 | Active Directory Domain Services | Planned |
-| 04 | Windows 11 Domain Client | Planned |
-| 05 | Group Policy | Planned |
-| 06 | Kali Linux Attack VM | Planned |
+| 02 | Windows Server | DC01 deployed |
+| 03 | Active Directory Domain Services | Domain, DNS, and helpdesk group access validated |
+| 04 | Windows 11 Domain Client | Domain join, trust, and share access validated |
+| 05 | Group Policy | HelpdeskDocs drive mapping validated as lab.support01 on Windows 11 |
+| 06 | Kali Linux Attack VM | Planned: start with Bash, users, groups, file permissions, DNS troubleshooting, and authentication logs |
 | 07 | Sysmon Endpoint Logging | Planned |
 | 08 | Splunk Enterprise | Planned |
-| 09 | Microsoft Sentinel | Planned |
-| 10 | Incident Response and Threat Hunting | Planned |
+| 09 | Microsoft Sentinel | Planned: first practice Azure access control with an Entra test group and a private storage container, including revocation |
+| 10 | Incident Response and Threat Hunting | Planned: include a simulated phishing report, analyst triage, and escalation |
+| Later | AI email phishing detector: flag suspicious messages for analyst review and evaluate false positives and missed phishing on labeled examples. | Future goal |
+
+Practice Zendesk alongside access and troubleshooting work, starting with a simulated HelpdeskDocs ticket. Record the request, approval when needed, internal findings, requester reply, and verified outcome. Use manually reviewed phishing examples from incident response when evaluating the later detector.
 
 ## Evidence Standard
 

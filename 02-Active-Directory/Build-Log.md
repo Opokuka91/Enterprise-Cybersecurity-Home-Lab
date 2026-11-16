@@ -533,3 +533,22 @@ The group has Read at the SMB share and Read & execute on the NTFS folder, inher
 [Server permissions](Evidence/Screenshots/068-HelpdeskDocs-Permissions.png) | [Client read and write tests](Evidence/Screenshots/069-HelpdeskDocs-Client-Access.png)
 
 After clean shutdown, verified DC01-007-HelpdeskDocs-ReadOnly as the current server snapshot. [VirtualBox snapshot query](Evidence/070-DC01-HelpdeskDocs-Snapshot.txt)
+
+## 2026-11-16 - Group Policy baseline for Lab Users
+
+On DC01, selected KAO Lab / Lab Users in Group Policy Management. Linked Group Policy Objects was empty. Group Policy Inheritance listed Default Domain Policy from kaotech.home.arpa at precedence 1, enabled, with no WMI filter. This inspection recorded the OU baseline before configuring the drive mapping.
+
+Evidence: [Lab Users direct links before the change](Evidence/Screenshots/071-Helpdesk-GPO-Baseline.png)
+
+### HelpdeskDocs drive mapping
+
+In Group Policy Management on DC01:
+
+1. Right-clicked **KAO Lab > Lab Users**, selected **Create a GPO in this domain, and Link it here**, and named it **HelpdeskDocs Drive**. Verified the link was enabled at order 1.
+2. Edited **User Configuration > Preferences > Windows Settings > Drive Maps** and created a mapped drive. Set the action to **Create**, the location to `\\DC01\HelpdeskDocs`, the label to **HelpdeskDocs**, and the fixed letter to **H:**.
+3. On **Common**, selected **Run in logged-on user's security context** and **Item-level targeting**. In **Targeting > New Item > Security Group**, selected **User in group** and resolved `KAOTECH\GG-Helpdesk`. Saved the item and confirmed it appeared in the editor.
+4. On KAO-W11-LAB01, confirmed lab.support01 had no existing network mapping and H: was available. Refreshed user policy, verified the new mapped drive, and read Welcome.txt. The SMB and NTFS permissions on the server continue to govern file access.
+
+[OU link](Evidence/Screenshots/072-Helpdesk-Drive-GPO-Link.png) | [Drive settings](Evidence/Screenshots/073-Helpdesk-Drive-Mapping.png) | [Group targeting](Evidence/Screenshots/074-Helpdesk-Drive-Targeting.png) | [Client result](Evidence/Screenshots/075-Helpdesk-Drive-Client.png)
+
+Verified the powered-off DC01 snapshot [DC01-008-HelpdeskDrive-GPOValidated](Evidence/076-DC01-HelpdeskDrive-Snapshot.txt).
