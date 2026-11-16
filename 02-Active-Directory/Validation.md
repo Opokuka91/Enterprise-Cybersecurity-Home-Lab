@@ -140,3 +140,9 @@ On KAO-W11-LAB01, whoami returned kaotech\lab.support01. Before refresh, H: was 
 In the kaotech\lab.support01 session on Windows 11, Get-Content H:\Welcome.txt returned the reference text. New-Item with a unique test filename on H: returned Access denied. Opening the existing Welcome.txt with FileMode.Open and FileAccess.Write also returned Access denied. No write was performed against the reference file. SHA-256 hashes before and after matched. No new snapshot was needed for this validation.
 
 [Read, create, and edit checks](Evidence/Screenshots/077-H-Drive-Read-Create-Edit-Test.png)
+
+### Outside-user client result
+
+On Windows 11, whoami confirmed kaotech\lab.outside01. After a successful user policy refresh, net use listed no connections, and net use H: returned connection not found (2250). Reading `\\DC01\HelpdeskDocs\Welcome.txt` returned Access is denied. Together with the DC01 membership baseline, this validates skipped drive mapping and denied direct file access for this test user.
+
+[Client result](Evidence/Screenshots/079-Outside-User-Access-Denied.png)
