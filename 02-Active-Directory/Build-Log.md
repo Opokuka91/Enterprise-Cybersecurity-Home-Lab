@@ -582,3 +582,9 @@ Added lab.outside01 to GG-Helpdesk using Add-ADGroupMember on DC01. Get-ADGroupM
 Following the GG-Helpdesk membership change and a fresh Windows 11 sign-in, whoami returned kaotech\lab.outside01. User policy refresh succeeded. Net use H: showed an OK connection to `\\DC01\HelpdeskDocs`. Reading Welcome.txt via both H: and the direct UNC path succeeded. This retest demonstrates the change from denied access to working access after the group grant.
 
 [Client access after grant](Evidence/Screenshots/081-Outside01-Helpdesk-Access-Granted.png)
+
+### Membership change recovery checkpoint
+
+After the successful Windows 11 access retest, shut DC01 down using the guest shutdown command. VirtualBox created DC01-009-HelpdeskMembership-Granted. A fresh showvminfo query confirmed the server was powered off and the named snapshot was current. DC01 was left powered off at the end of the session.
+
+[Snapshot verification](Evidence/082-DC01-HelpdeskMembership-Snapshot.txt)

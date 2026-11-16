@@ -1,0 +1,4 @@
+name="DC01"
+VMState="poweroff"
+CurrentSnapshotName="DC01-009-HelpdeskMembership-Granted"
+CurrentSnapshotUUID="64b0090d-3d1f-478b-afd5-4811de0359a3"
