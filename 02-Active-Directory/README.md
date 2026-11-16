@@ -28,7 +28,7 @@ This lab is complete when:
 - Active Directory Domain Services is installed.
 - A new forest/domain is created.
 - DNS is functional.
-- Windows 11 client can join the domain. (pending next milestone)
+- Windows 11 client joins the domain and passes the secure-channel check.
 - Evidence screenshots are captured.
 - VirtualBox snapshots are created at stable milestones.
 - Documentation is committed to GitHub.
@@ -40,7 +40,7 @@ This lab is complete when:
 - Active Directory Domain Services and DNS are installed.
 - DC01 has been promoted as the first domain controller for kaotech.home.arpa.
 - AD DNS SRV records were validated after re-registering DNS with Netlogon.
-- The next milestone is joining the Windows 11 client to the domain.
+- KAO-W11-LAB01 joined kaotech.home.arpa. A domain sign-in, DNS lookup, and secure-channel check passed. [View the client validation](Evidence/Screenshots/058-Windows11-Domain-Identity-and-Trust.png).
 
 ## Evidence Standard
 

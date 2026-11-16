@@ -38,3 +38,13 @@ Evidence:
 
 Lesson:
 Domain controllers rely heavily on DNS. If AD DS promotion succeeds but `dcdiag` fails, verify DNS SRV records before assuming the domain controller is broken.
+
+## Windows 11 domain join credential rejection
+
+Add-Computer reported an incorrect username or password and HasSucceeded=False. The client had already resolved the domain LDAP SRV record. Repeating the join with the domain administrator credentials returned HasSucceeded=True and a restart prompt. The error did not identify which credential field caused the rejection.
+
+Evidence: [Failed attempt and successful retry](Evidence/Screenshots/057-Windows11-Domain-Join-Result.png)
+
+### Black screen during the post-join restart
+
+Windows displayed an update message and then a black screen. VirtualBox still reported the client running. The virtual disk counters stayed unchanged across repeated checks, and a normal power-button request did not shut down the guest. After an authorized VirtualBox reset of the Windows 11 client, the Windows sign-in screen appeared with the Other user option. The cause of the black screen was not established.

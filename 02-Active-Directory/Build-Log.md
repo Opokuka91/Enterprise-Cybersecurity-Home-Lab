@@ -442,3 +442,41 @@ Snapshot is visible in VirtualBox Manager and DC01 is powered off.
 
 Git:
 Commit and push this completed Active Directory promotion checkpoint.
+
+## 2026-11-15 - Started pfSense for the Windows 11 domain join
+
+Started PFSENSE-FW01 and verified that the console displayed LAN IPv4 10.10.10.1/24 before starting DC01.
+
+Evidence: [pfSense LAN interface](Evidence/Screenshots/053-pfSense-LAN-Ready-for-Domain-Join.png)
+
+### DC01 readiness before client startup
+
+DC01 passed `dcdiag /test:Connectivity`. A direct DNS query to 10.10.10.10 for `_ldap._tcp.dc._msdcs.kaotech.home.arpa` returned dc01.kaotech.home.arpa on LDAP port 389 with IPv4 address 10.10.10.10.
+
+Evidence: [DC01 connectivity and LDAP SRV lookup](Evidence/Screenshots/054-DC01-PreJoin-AD-DNS-Ready.png)
+
+### Windows 11 network before the join
+
+KAO-W11-LAB01 was in WORKGROUP. Ethernet had IPv4 address 10.10.10.100 and used 10.10.10.1 for both its default gateway and DNS.
+
+Evidence: [055-Windows11-PreJoin-Network.png](Evidence/Screenshots/055-Windows11-PreJoin-Network.png)
+
+Changed Ethernet DNS to 10.10.10.10 and verified the configured IPv4 resolver. Both the gateway and DC01 answered ICMP. The client resolved the domain LDAP SRV record to dc01.kaotech.home.arpa on port 389, with IPv4 address 10.10.10.10.
+
+Evidence: [056-Windows11-AD-DNS-and-Connectivity.png](Evidence/Screenshots/056-Windows11-AD-DNS-and-Connectivity.png)
+
+### Windows 11 domain join
+
+The first Add-Computer attempt returned an incorrect username or password error. The retry for KAO-W11-LAB01 returned HasSucceeded=True and requested a restart to apply membership in kaotech.home.arpa.
+
+Evidence: [Domain join results](Evidence/Screenshots/057-Windows11-Domain-Join-Result.png)
+
+### Verified Windows 11 domain sign-in and trust
+
+On KAO-W11-LAB01, whoami returned kaotech\administrator. Domain membership and Test-ComputerSecureChannel both returned True for kaotech.home.arpa. DC01 resolved to 10.10.10.10 and the gateway and DC01 both answered ping.
+
+Evidence: [Domain identity, membership, trust, DNS, and connectivity](Evidence/Screenshots/058-Windows11-Domain-Identity-and-Trust.png)
+
+The client shut down cleanly after validation. VirtualBox created KAO-W11-LAB01-003-DomainJoinValidated. A fresh showvminfo query confirmed the VM was powered off and the named snapshot was current. The capture below displays the selected fields from that query.
+
+Evidence: [Current client snapshot and power state](Evidence/Screenshots/059-Windows11-DomainJoinValidated-Snapshot.png)

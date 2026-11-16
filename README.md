@@ -190,17 +190,8 @@ Designed and deployed a pfSense-based enterprise firewall lab in VirtualBox, imp
 - How snapshots support recovery and change control.
 - How this firewall will support future Active Directory and SIEM labs.
 
-## Next Project
+## Active Directory lab
 
-The next major build is Windows Server and Active Directory.
+DC01 provides Active Directory and DNS for `kaotech.home.arpa`. The Windows 11 client KAO-W11-LAB01 joined the domain. After restart, a domain sign-in and a secure-channel test confirmed the client trusted the domain. See the [Active Directory lab](02-Active-Directory/README.md) for configuration and validation evidence.
 
-Planned work:
-
-- Create `DC01`.
-- Install Windows Server.
-- Configure static IP addressing.
-- Install Active Directory Domain Services.
-- Promote the server to a domain controller.
-- Create OUs, users, groups, and service accounts.
-- Join the Windows 11 client to the domain.
-- Document the full identity infrastructure build.
+Planned identity work includes OUs, users, groups, and service accounts.

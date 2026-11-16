@@ -105,8 +105,14 @@ Evidence:
 - Evidence/Screenshots/051B-ADDS-DCDIAG-Connectivity-Passed.png
 - Evidence/Screenshots/052-DC01-Snapshot-ADDS-Promoted-DNSValidated.png
 
-Next Required Step:
-- Start pfSense and DC01.
-- Start the Windows 11 client.
-- Configure the client DNS to use DC01.
-- Join the Windows 11 client to the `kaotech.home.arpa` domain.
+## Windows 11 domain membership | 2026-11-15
+
+| Check on KAO-W11-LAB01 | Observed result |
+| --- | --- |
+| `whoami` | `kaotech\administrator` |
+| `Get-CimInstance Win32_ComputerSystem` | Domain `kaotech.home.arpa`, PartOfDomain `True` |
+| `Test-ComputerSecureChannel -Verbose` | `True` |
+| `Resolve-DnsName dc01.kaotech.home.arpa -Type A` | `10.10.10.10` |
+| `Test-Connection 10.10.10.1,10.10.10.10 -Count 1` | Both hosts replied |
+
+[Client DNS before the join](Evidence/Screenshots/056-Windows11-AD-DNS-and-Connectivity.png) · [Join result before restart](Evidence/Screenshots/057-Windows11-Domain-Join-Result.png) · [Post-restart validation](Evidence/Screenshots/058-Windows11-Domain-Identity-and-Trust.png)

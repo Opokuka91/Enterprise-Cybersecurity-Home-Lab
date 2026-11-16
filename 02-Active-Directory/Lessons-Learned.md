@@ -15,3 +15,7 @@ The initial `dcdiag` failure was documented instead of hidden. Capturing the iss
 ## Snapshots Support Change Control
 
 The `DC01-005-ADDS-Promoted-DNSValidated` snapshot creates a rollback point before the next major change: joining the Windows 11 client to the domain.
+
+## Validate from the joined workstation
+
+The join command succeeded before restart. After restart, choosing Other user allowed sign-in with the domain account. Checking whoami confirmed the session identity, while Test-ComputerSecureChannel independently confirmed the workstation trust relationship.
