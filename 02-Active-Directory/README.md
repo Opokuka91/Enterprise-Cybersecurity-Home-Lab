@@ -59,3 +59,7 @@ Every major milestone must include:
 - Do not publish passwords, recovery keys, product keys, or private credentials.
 - Use lab-only passwords and store them outside the public GitHub repository.
 - Document configuration decisions without exposing secrets.
+
+## Helpdesk shared folder
+
+Members of GG-Helpdesk can read the lab reference file at `\\DC01\HelpdeskDocs\Welcome.txt`. The Windows 11 test verified that lab.support01 could read the file and could not create a file in the share. [Configuration and test procedure](Build-Log.md#2026-11-15---read-only-helpdesk-folder-on-dc01)

@@ -516,3 +516,20 @@ Evidence: [Selected VirtualBox snapshot fields](Evidence/Screenshots/066-DC01-Id
 The initial client check ran under KAOTECH\Administrator and returned no helpdesk group row. After switching users, hostname returned KAO-W11-LAB01, whoami returned kaotech\lab.support01, and whoami /groups listed KAOTECH\GG-Helpdesk as enabled by default and enabled in the current session.
 
 Evidence: [Windows 11 session identity and group membership](Evidence/Screenshots/067-Windows11-LabSupport01-Helpdesk-Token.png)
+
+## 2026-11-15 - Read-only helpdesk folder on DC01
+
+Created a dedicated folder and assigned access to the existing global security group. On this new folder, the following elevated PowerShell commands set the file system and share permissions:
+
+```powershell
+New-Item C:\HelpdeskDocs -ItemType Directory
+icacls C:\HelpdeskDocs /inheritance:r /grant:r 'BUILTIN\Administrators:(OI)(CI)F' 'SYSTEM:(OI)(CI)F' 'KAOTECH\GG-Helpdesk:(OI)(CI)RX'
+Set-Content C:\HelpdeskDocs\Welcome.txt 'KAO Lab: Helpdesk reference file.'
+New-SmbShare -Name HelpdeskDocs -Path C:\HelpdeskDocs -ReadAccess 'KAOTECH\GG-Helpdesk' -FullAccess 'BUILTIN\Administrators'
+```
+
+The group has Read at the SMB share and Read & execute on the NTFS folder, inherited by its files and subfolders. Administrators retain full control. On KAO-W11-LAB01, lab.support01 read Welcome.txt over SMB. Creating write-test.txt returned Access denied, and Test-Path confirmed the file was absent. Get-SmbSession on DC01 identified the client as KAOTECH\lab.support01 at 10.10.10.100.
+
+[Server permissions](Evidence/Screenshots/068-HelpdeskDocs-Permissions.png) | [Client read and write tests](Evidence/Screenshots/069-HelpdeskDocs-Client-Access.png)
+
+After clean shutdown, verified DC01-007-HelpdeskDocs-ReadOnly as the current server snapshot. [VirtualBox snapshot query](Evidence/070-DC01-HelpdeskDocs-Snapshot.txt)

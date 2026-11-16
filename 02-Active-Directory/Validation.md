@@ -126,3 +126,7 @@ Running `Get-ADGroupMember GG-Helpdesk -Server DC01` returned Lab Support 01 (la
 [User attributes](Evidence/Screenshots/064-Lab-Support01-Account-Verified.png) | [Membership result](Evidence/Screenshots/065-GG-Helpdesk-Direct-Membership.png)
 
 On Windows 11, `whoami` confirmed the active account was kaotech\lab.support01. In the same session on KAO-W11-LAB01, `whoami /groups | findstr /i GG-Helpdesk` returned KAOTECH\GG-Helpdesk with the Enabled group attribute. [Client token evidence](Evidence/Screenshots/067-Windows11-LabSupport01-Helpdesk-Token.png)
+
+## Shared folder authorization | 2026-11-15
+
+From the normal lab.support01 session on KAO-W11-LAB01, Get-Content returned the contents of `\\DC01\HelpdeskDocs\Welcome.txt`. New-Item on the same share returned UnauthorizedAccessException when creating write-test.txt. Test-Path returned False. The successful read and specific permission error confirmed the intended read-only access. [Client evidence](Evidence/Screenshots/069-HelpdeskDocs-Client-Access.png)

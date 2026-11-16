@@ -1,0 +1,3 @@
+name="DC01"
+VMState="poweroff"
+CurrentSnapshotName="DC01-007-HelpdeskDocs-ReadOnly"
