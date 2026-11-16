@@ -510,3 +510,9 @@ Evidence: [Direct membership on DC01](Evidence/Screenshots/065-GG-Helpdesk-Direc
 After DC01 shut down, VirtualBox created DC01-006-OU-User-Group-Validated. A separate showvminfo query confirmed the server was powered off and this snapshot was current.
 
 Evidence: [Selected VirtualBox snapshot fields](Evidence/Screenshots/066-DC01-Identity-Snapshot.png)
+
+### Verified helpdesk membership in the Windows 11 session
+
+The initial client check ran under KAOTECH\Administrator and returned no helpdesk group row. After switching users, hostname returned KAO-W11-LAB01, whoami returned kaotech\lab.support01, and whoami /groups listed KAOTECH\GG-Helpdesk as enabled by default and enabled in the current session.
+
+Evidence: [Windows 11 session identity and group membership](Evidence/Screenshots/067-Windows11-LabSupport01-Helpdesk-Token.png)

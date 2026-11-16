@@ -124,3 +124,5 @@ On DC01, the Lab Users and Lab Groups OUs were siblings under KAO Lab. Lab Users
 Running `Get-ADGroupMember GG-Helpdesk -Server DC01` returned Lab Support 01 (lab.support01) as a direct user member. This check covers directory membership. Resource permissions were outside this checkpoint.
 
 [User attributes](Evidence/Screenshots/064-Lab-Support01-Account-Verified.png) | [Membership result](Evidence/Screenshots/065-GG-Helpdesk-Direct-Membership.png)
+
+On Windows 11, `whoami` confirmed the active account was kaotech\lab.support01. In the same session on KAO-W11-LAB01, `whoami /groups | findstr /i GG-Helpdesk` returned KAOTECH\GG-Helpdesk with the Enabled group attribute. [Client token evidence](Evidence/Screenshots/067-Windows11-LabSupport01-Helpdesk-Token.png)
