@@ -480,3 +480,33 @@ Evidence: [Domain identity, membership, trust, DNS, and connectivity](Evidence/S
 The client shut down cleanly after validation. VirtualBox created KAO-W11-LAB01-003-DomainJoinValidated. A fresh showvminfo query confirmed the VM was powered off and the named snapshot was current. The capture below displays the selected fields from that query.
 
 Evidence: [Current client snapshot and power state](Evidence/Screenshots/059-Windows11-DomainJoinValidated-Snapshot.png)
+
+## 2026-11-15 - Created the parent lab OU
+
+In Active Directory Users and Computers on DC01, selected kaotech.home.arpa and created the KAO Lab organizational unit with accidental-deletion protection selected. Verified that KAO Lab appeared directly under the domain and its contents pane was empty.
+
+Evidence: [KAO Lab OU](Evidence/Screenshots/060-KAO-Lab-OU.png)
+
+Verified in Active Directory Users and Computers on DC01 that the newly created Lab Users OU is directly inside KAO Lab. The selected OU showed no child objects.
+
+Evidence: [Lab Users OU under KAO Lab](Evidence/Screenshots/061-Lab-Users-OU.png)
+
+Verified on DC01 that Lab Groups and Lab Users are sibling OUs directly under KAO Lab. Lab Groups was selected and its contents pane was empty.
+
+Evidence: [Lab Groups OU under KAO Lab](Evidence/Screenshots/062-Lab-Groups-OU.png)
+
+Verified on DC01 that the Lab Groups OU under KAO Lab contains GG-Helpdesk. Active Directory Users and Computers displayed its type as Security Group - Global.
+
+Evidence: [GG-Helpdesk location, type, and scope](Evidence/Screenshots/063-GG-Helpdesk-Global-Security-Group.png)
+
+Queried DC01 with Get-ADUser after the creation wizard finished. Lab Support 01 is enabled, has sign-in name lab.support01@kaotech.home.arpa, and resides in KAO Lab / Lab Users. The pwdLastSet value was 0, consistent with the selected requirement to change the password at next sign-in.
+
+Evidence: [Verified practice account](Evidence/Screenshots/064-Lab-Support01-Account-Verified.png)
+
+Queried GG-Helpdesk on DC01 using Get-ADGroupMember without recursion. The direct membership list returned Lab Support 01, account lab.support01, object class user.
+
+Evidence: [Direct membership on DC01](Evidence/Screenshots/065-GG-Helpdesk-Direct-Membership.png)
+
+After DC01 shut down, VirtualBox created DC01-006-OU-User-Group-Validated. A separate showvminfo query confirmed the server was powered off and this snapshot was current.
+
+Evidence: [Selected VirtualBox snapshot fields](Evidence/Screenshots/066-DC01-Identity-Snapshot.png)

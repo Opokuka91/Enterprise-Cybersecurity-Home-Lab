@@ -116,3 +116,11 @@ Evidence:
 | `Test-Connection 10.10.10.1,10.10.10.10 -Count 1` | Both hosts replied |
 
 [Client DNS before the join](Evidence/Screenshots/056-Windows11-AD-DNS-and-Connectivity.png) · [Join result before restart](Evidence/Screenshots/057-Windows11-Domain-Join-Result.png) · [Post-restart validation](Evidence/Screenshots/058-Windows11-Domain-Identity-and-Trust.png)
+
+## Helpdesk group membership | 2026-11-15
+
+On DC01, the Lab Users and Lab Groups OUs were siblings under KAO Lab. Lab Users held the enabled lab.support01 user. Lab Groups held GG-Helpdesk, a global security group.
+
+Running `Get-ADGroupMember GG-Helpdesk -Server DC01` returned Lab Support 01 (lab.support01) as a direct user member. This check covers directory membership. Resource permissions were outside this checkpoint.
+
+[User attributes](Evidence/Screenshots/064-Lab-Support01-Account-Verified.png) | [Membership result](Evidence/Screenshots/065-GG-Helpdesk-Direct-Membership.png)

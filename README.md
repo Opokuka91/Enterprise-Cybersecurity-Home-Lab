@@ -194,4 +194,4 @@ Designed and deployed a pfSense-based enterprise firewall lab in VirtualBox, imp
 
 DC01 provides Active Directory and DNS for `kaotech.home.arpa`. The Windows 11 client KAO-W11-LAB01 joined the domain. After restart, a domain sign-in and a secure-channel test confirmed the client trusted the domain. See the [Active Directory lab](02-Active-Directory/README.md) for configuration and validation evidence.
 
-Planned identity work includes OUs, users, groups, and service accounts.
+DC01 hosts the Lab Users and Lab Groups OUs under KAO Lab. The lab.support01 account is a direct member of the GG-Helpdesk global security group. Service accounts remain planned.

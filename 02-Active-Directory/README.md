@@ -42,6 +42,8 @@ This lab is complete when:
 - AD DNS SRV records were validated after re-registering DNS with Netlogon.
 - KAO-W11-LAB01 joined kaotech.home.arpa. A domain sign-in, DNS lookup, and secure-channel check passed. [View the client validation](Evidence/Screenshots/058-Windows11-Domain-Identity-and-Trust.png).
 
+The KAO Lab OU contains Lab Users and Lab Groups. DC01 confirmed that lab.support01 is a direct member of the GG-Helpdesk global security group. [View the membership query](Evidence/Screenshots/065-GG-Helpdesk-Direct-Membership.png).
+
 ## Evidence Standard
 
 Every major milestone must include:
