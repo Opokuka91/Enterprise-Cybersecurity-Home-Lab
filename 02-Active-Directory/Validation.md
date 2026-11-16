@@ -134,3 +134,9 @@ From the normal lab.support01 session on KAO-W11-LAB01, Get-Content returned the
 ## HelpdeskDocs drive mapping | 2026-11-16
 
 On KAO-W11-LAB01, whoami returned kaotech\lab.support01. Before refresh, H: was available and net use listed no connections. The user policy refresh succeeded. The user gpresult summary included HelpdeskDocs Drive, net use showed H: connected to `\\DC01\HelpdeskDocs` with status OK, and reading H:\Welcome.txt returned the lab reference text. [Windows 11 evidence](Evidence/Screenshots/075-Helpdesk-Drive-Client.png)
+
+## 2026-11-16 - H drive read and write checks
+
+In the kaotech\lab.support01 session on Windows 11, Get-Content H:\Welcome.txt returned the reference text. New-Item with a unique test filename on H: returned Access denied. Opening the existing Welcome.txt with FileMode.Open and FileAccess.Write also returned Access denied. No write was performed against the reference file. SHA-256 hashes before and after matched. No new snapshot was needed for this validation.
+
+[Read, create, and edit checks](Evidence/Screenshots/077-H-Drive-Read-Create-Edit-Test.png)

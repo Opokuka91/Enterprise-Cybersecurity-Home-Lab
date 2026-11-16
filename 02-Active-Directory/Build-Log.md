@@ -552,3 +552,9 @@ In Group Policy Management on DC01:
 [OU link](Evidence/Screenshots/072-Helpdesk-Drive-GPO-Link.png) | [Drive settings](Evidence/Screenshots/073-Helpdesk-Drive-Mapping.png) | [Group targeting](Evidence/Screenshots/074-Helpdesk-Drive-Targeting.png) | [Client result](Evidence/Screenshots/075-Helpdesk-Drive-Client.png)
 
 Verified the powered-off DC01 snapshot [DC01-008-HelpdeskDrive-GPOValidated](Evidence/076-DC01-HelpdeskDrive-Snapshot.txt).
+
+## 2026-11-16 - H drive read and write checks
+
+In the kaotech\lab.support01 session on Windows 11, Get-Content H:\Welcome.txt returned the reference text. New-Item with a unique test filename on H: returned Access denied. Opening the existing Welcome.txt with FileMode.Open and FileAccess.Write also returned Access denied. No write was performed against the reference file. SHA-256 hashes before and after matched. No new snapshot was needed for this validation.
+
+[Read, create, and edit checks](Evidence/Screenshots/077-H-Drive-Read-Create-Edit-Test.png)
